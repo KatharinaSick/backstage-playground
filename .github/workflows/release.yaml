@@ -24,20 +24,14 @@ jobs:
           fetch-depth: 0
       - name: Setup Node.js
         uses: actions/setup-node@v3
-        with:
-          node-version: 20.x
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@dynatrace'
       - name: Build
         run: |
           yarn install --frozen-lockfile
           yarn tsc
           yarn build:all
-        env:
-          NPM_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
       - name: Build Image & Release
         run: |
-          docker build -f packages/backend/Dockerfile --tag katharinasick/backstage-playground --build-arg npm_token=$NPM_TOKEN .
+          docker build -f packages/backend/Dockerfile --tag katharinasick/backstage-playground .
           npx semantic-release-plus
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

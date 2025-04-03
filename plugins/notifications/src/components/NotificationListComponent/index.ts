@@ -1,1 +1,1 @@
-export { NotificationListComponent } from './NotificationListComponent';
+export { NotificationListComponent } from './NotifciationListComponent.tsx';

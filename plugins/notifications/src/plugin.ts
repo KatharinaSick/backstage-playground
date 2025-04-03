@@ -4,7 +4,6 @@ import {
   createRoutableExtension,
   discoveryApiRef,
 } from '@backstage/core-plugin-api';
-
 import { rootRouteRef } from './routes';
 import { NotificationsApiClient, notificationsApiRef } from './api';
 

@@ -1,14 +1,28 @@
 # notifications
 
-Welcome to the notifications backend plugin!
+This plugin backend was templated using the Backstage CLI. You should replace this text with a description of your plugin backend.
 
-_This plugin was created through the Backstage CLI_
+## Installation
 
-## Getting started
+This plugin is installed via the `@internal/plugin-notifications-backend` package. To install it to your backend package, run the following command:
 
-Your plugin has been added to the example app in this repository, meaning you'll be able to access it by running `yarn
-start` in the root directory, and then navigating to [/notifications](http://localhost:3000/notifications).
+```bash
+# From your root directory
+yarn --cwd packages/backend add @internal/plugin-notifications-backend
+```
 
-You can also serve the plugin in isolation by running `yarn start` in the plugin directory.
-This method of serving the plugin provides quicker iteration speed and a faster startup and hot reloads.
-It is only meant for local development, and the setup for it can be found inside the [/dev](/dev) directory.
+Then add the plugin to your backend in `packages/backend/src/index.ts`:
+
+```ts
+const backend = createBackend();
+// ...
+backend.add(import('@internal/plugin-notifications-backend'));
+```
+
+## Development
+
+This plugin backend can be started in a standalone mode from directly in this
+package with `yarn start`. It is a limited setup that is most convenient when
+developing the plugin backend itself.
+
+If you want to run the entire project, including the frontend, run `yarn dev` from the root directory.

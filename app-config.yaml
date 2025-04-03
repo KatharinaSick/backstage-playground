@@ -6,16 +6,22 @@ organization:
   name: Backstage Playground
 
 backend:
+  # Used for enabling authentication, secret is shared by all backend plugins
+  # See https://backstage.io/docs/auth/service-to-service-auth for
+  # information on the format
+  # auth:
+  #   keys:
+  #     - secret: ${BACKEND_SECRET}
   baseUrl: http://localhost:7007
   listen:
     port: 7007
   csp:
     # Content-Security-Policy directives follow the Helmet format: https://helmetjs.github.io/#reference
     # Default Helmet Content-Security-Policy values can be removed by setting the key to false
-    connect-src: ["'self'", 'http:', 'https:']
+    connect-src: [ "'self'", 'http:', 'https:' ]
   cors:
     origin: http://localhost:3000
-    methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
+    methods: [ GET, HEAD, PATCH, POST, PUT, DELETE ]
     credentials: true
   # If you want to use Postgres see https://backstage.io/docs/tutorials/switching-sqlite-postgres/
   database:
@@ -32,10 +38,12 @@ techdocs:
 
 # See https://backstage.io/docs/auth/
 auth:
-  providers: {}
+  providers:
+    # See https://backstage.io/docs/auth/guest/provider
+    guest: { }
 
 # See https://backstage.io/docs/features/software-templates/configuration
-scaffolder: {}
+scaffolder: { }
 
 # Add integrations to read from GitHub or GitLab
 # See https://backstage.io/docs/integrations/
@@ -56,11 +64,19 @@ catalog:
     - type: file
       target: ../../examples/template/template.yaml
       rules:
-        - allow: [Template]
+        - allow: [ Template ]
 
     # Local example organizational data
     - type: file
       target: ../../examples/org.yaml
       rules:
-        - allow: [User, Group]
+        - allow: [ User, Group ]
+
   # Add providers here if you want to read from GitHub or GitLab
+
+# See https://github.com/RoadieHQ/roadie-backstage-plugins/tree/main/plugins/backend/backstage-plugin-argo-cd-backend
+argocd:
+  appLocatorMethods: []
+
+dynatrace:
+  environments: []
