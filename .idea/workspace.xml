@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53c5d0e7-5728-42c1-b322-d2067e429c82" name="Changes" comment="Add plugins">
-      <change afterPath="$PROJECT_DIR$/.github/workflows/release.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/deployment/config.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/deployment/deployment.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/deployment/secrets.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/deployment/service.yaml" afterDir="false" />
+    <list default="true" id="53c5d0e7-5728-42c1-b322-d2067e429c82" name="Changes" comment="Remove/fix tests">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +21,13 @@
     &quot;assignee&quot;: &quot;KatharinaSick&quot;
   }
 }</component>
+  <component name="GithubProjectSettings">
+    <option name="branchProtectionPatterns">
+      <list>
+        <option value="main" />
+      </list>
+    </option>
+  </component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;git@github.com:KatharinaSick/backstage-playground.git&quot;,
@@ -50,7 +53,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "chore/update-to-1.37",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "/Users/katharina.sick/Library/CloudStorage/OneDrive-Dynatrace/Desktop/code/github/ksick/backstage-playground/deployment",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -98,7 +101,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745230198291</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Remove/fix tests">
+      <option name="closed" value="true" />
+      <created>1745231119098</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1745231119098</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -116,7 +127,9 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="Merge pull request #1 from KatharinaSick/chore/update-to-1.37&#10;&#10;chore!: Update to latest versions" />
     <MESSAGE value="Add plugins" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add plugins" />
+    <MESSAGE value="Remove/fix tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove/fix tests" />
   </component>
 </project>
