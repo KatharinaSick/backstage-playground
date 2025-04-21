@@ -6,126 +6,65 @@
  * Happy hacking!
  */
 
-import Router from 'express-promise-router';
-import {
-  createServiceBuilder,
-  loadBackendConfig,
-  getRootLogger,
-  useHotMemoize,
-  notFoundHandler,
-  CacheManager,
-  DatabaseManager,
-  HostDiscovery,
-  UrlReaders,
-  ServerTokenManager,
-} from '@backstage/backend-common';
-import { TaskScheduler } from '@backstage/backend-tasks';
-import { Config } from '@backstage/config';
-import app from './plugins/app';
-import auth from './plugins/auth';
-import catalog from './plugins/catalog';
-import scaffolder from './plugins/scaffolder';
-import proxy from './plugins/proxy';
-import techdocs from './plugins/techdocs';
-import search from './plugins/search';
-import kubernetes from './plugins/kubernetes';
-import notifications from './plugins/notifications';
-import argocd from './plugins/argocd';
-import dynatrace from './plugins/dynatrace';
-import { PluginEnvironment } from './types';
-import { ServerPermissionClient } from '@backstage/plugin-permission-node';
-import { DefaultIdentityClient } from '@backstage/plugin-auth-node';
-import { metricsHandler } from './metrics';
+import { createBackend } from '@backstage/backend-defaults';
 
-function makeCreateEnv(config: Config) {
-  const root = getRootLogger();
-  const reader = UrlReaders.default({ logger: root, config });
-  const discovery = HostDiscovery.fromConfig(config);
-  const cacheManager = CacheManager.fromConfig(config);
-  const databaseManager = DatabaseManager.fromConfig(config, { logger: root });
-  const tokenManager = ServerTokenManager.noop();
-  const taskScheduler = TaskScheduler.fromConfig(config, { databaseManager });
+const backend = createBackend();
 
-  const identity = DefaultIdentityClient.create({
-    discovery,
-  });
-  const permissions = ServerPermissionClient.fromConfig(config, {
-    discovery,
-    tokenManager,
-  });
+backend.add(import('@backstage/plugin-app-backend'));
+backend.add(import('@backstage/plugin-proxy-backend'));
+backend.add(import('@backstage/plugin-scaffolder-backend'));
+backend.add(import('@backstage/plugin-scaffolder-backend-module-github'));
+backend.add(import('@backstage/plugin-techdocs-backend'));
 
-  root.info(`Created UrlReader ${reader}`);
+// auth plugin
+backend.add(import('@backstage/plugin-auth-backend'));
+// See https://backstage.io/docs/backend-system/building-backends/migrating#the-auth-plugin
+backend.add(import('@backstage/plugin-auth-backend-module-guest-provider'));
+// See https://backstage.io/docs/auth/guest/provider
 
-  return (plugin: string): PluginEnvironment => {
-    const logger = root.child({ type: 'plugin', plugin });
-    const database = databaseManager.forPlugin(plugin);
-    const cache = cacheManager.forPlugin(plugin);
-    const scheduler = taskScheduler.forPlugin(plugin);
-    return {
-      logger,
-      database,
-      cache,
-      config,
-      reader,
-      discovery,
-      tokenManager,
-      scheduler,
-      permissions,
-      identity,
-    };
-  };
-}
+// catalog plugin
+backend.add(import('@backstage/plugin-catalog-backend'));
+backend.add(
+  import('@backstage/plugin-catalog-backend-module-scaffolder-entity-model'),
+);
+// See https://backstage.io/docs/integrations/github/discovery
+backend.add(import('@backstage/plugin-catalog-backend-module-github'));
+// See https://backstage.io/docs/integrations/gitlab/discovery
+backend.add(import('@backstage/plugin-catalog-backend-module-gitlab'));
 
-async function main() {
-  const config = await loadBackendConfig({
-    argv: process.argv,
-    logger: getRootLogger(),
-  });
-  const createEnv = makeCreateEnv(config);
+// See https://backstage.io/docs/features/software-catalog/configuration#subscribing-to-catalog-errors
+backend.add(import('@backstage/plugin-catalog-backend-module-logs'));
 
-  const catalogEnv = useHotMemoize(module, () => createEnv('catalog'));
-  const scaffolderEnv = useHotMemoize(module, () => createEnv('scaffolder'));
-  const authEnv = useHotMemoize(module, () => createEnv('auth'));
-  const proxyEnv = useHotMemoize(module, () => createEnv('proxy'));
-  const techdocsEnv = useHotMemoize(module, () => createEnv('techdocs'));
-  const searchEnv = useHotMemoize(module, () => createEnv('search'));
-  const appEnv = useHotMemoize(module, () => createEnv('app'));
-  const kubernetesEnv = useHotMemoize(module, () => createEnv('kubernetes'));
-  const notificationsEnv = useHotMemoize(module, () =>
-    createEnv('notifications'),
-  );
-  const argocdEnv = useHotMemoize(module, () => createEnv('argocd'));
-  const dynatraceEnv = useHotMemoize(module, () => createEnv('dynatrace-dql'));
+// permission plugin
+backend.add(import('@backstage/plugin-permission-backend'));
+// See https://backstage.io/docs/permissions/getting-started for how to create your own permission policy
+backend.add(
+  import('@backstage/plugin-permission-backend-module-allow-all-policy'),
+);
 
-  const apiRouter = Router();
-  apiRouter.use('/catalog', await catalog(catalogEnv));
-  apiRouter.use('/scaffolder', await scaffolder(scaffolderEnv));
-  apiRouter.use('/auth', await auth(authEnv));
-  apiRouter.use('/techdocs', await techdocs(techdocsEnv));
-  apiRouter.use('/proxy', await proxy(proxyEnv));
-  apiRouter.use('/search', await search(searchEnv));
-  apiRouter.use('/kubernetes', await kubernetes(kubernetesEnv));
-  apiRouter.use('/notifications', await notifications(notificationsEnv));
-  apiRouter.use('/argocd', await argocd(argocdEnv));
-  apiRouter.use('/dynatrace-dql', await dynatrace(dynatraceEnv));
+// search plugin
+backend.add(import('@backstage/plugin-search-backend'));
 
-  // Add backends ABOVE this line; this 404 handler is the catch-all fallback
-  apiRouter.use(notFoundHandler());
+// search engine
+// See https://backstage.io/docs/features/search/search-engines
+backend.add(import('@backstage/plugin-search-backend-module-pg'));
 
-  const service = createServiceBuilder(module)
-    .loadConfig(config)
-    .addRouter('/api', apiRouter)
-    .addRouter('', await app(appEnv))
-    .addRouter('', metricsHandler());
+// search collators
+backend.add(import('@backstage/plugin-search-backend-module-catalog'));
+backend.add(import('@backstage/plugin-search-backend-module-techdocs'));
 
-  await service.start().catch(err => {
-    console.log(err);
-    process.exit(1);
-  });
-}
+// kubernetes
+backend.add(import('@backstage/plugin-kubernetes-backend'));
 
-module.hot?.accept();
-main().catch(error => {
-  console.error('Backend failed to start up', error);
-  process.exit(1);
-});
+// argocd
+// See https://github.com/RoadieHQ/roadie-backstage-plugins/tree/main/plugins/backend/backstage-plugin-argo-cd-backend
+backend.add(import('@roadiehq/backstage-plugin-argo-cd-backend/alpha'));
+
+// dynatrace
+// See https://github.com/Dynatrace/backstage-plugin
+backend.add(import('@dynatrace/backstage-plugin-dql-backend'));
+
+// notifications
+backend.add(import('@internal/plugin-notifications-backend'));
+
+backend.start();

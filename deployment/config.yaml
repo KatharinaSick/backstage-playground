@@ -95,7 +95,7 @@ data:
       clusterLocatorMethods:
         - type: config
           clusters: []
-          
+    
     # See https://github.com/Dynatrace/backstage-plugin?tab=readme-ov-file#getting-started
     dynatrace:
       environments:

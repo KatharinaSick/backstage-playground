@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="53c5d0e7-5728-42c1-b322-d2067e429c82" name="Changes" comment="Add plugins">
+      <change afterPath="$PROJECT_DIR$/.github/workflows/release.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deployment/config.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deployment/deployment.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deployment/secrets.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deployment/service.yaml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;KatharinaSick&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:KatharinaSick/backstage-playground.git&quot;,
+    &quot;accountId&quot;: &quot;f0d3108e-f12d-43bf-8e0a-1089ae5f0d52&quot;
+  }
+}</component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2viVx7PVEsmb1XrnMnRg3jee36d" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "chore/update-to-1.37",
+    "last_opened_file_path": "/Users/katharina.sick/Library/CloudStorage/OneDrive-Dynatrace/Desktop/code/github/ksick/backstage-playground/deployment",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "prettierjs.PrettierConfiguration.Package": "/Users/katharina.sick/Library/CloudStorage/OneDrive-Dynatrace/Desktop/code/github/ksick/backstage-playground/node_modules/prettier",
+    "ts.external.directory.path": "/Users/katharina.sick/Library/CloudStorage/OneDrive-Dynatrace/Desktop/code/github/ksick/backstage-playground/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/deployment" />
+      <recent name="$PROJECT_DIR$/plugins/notifications/src/components/NotificationListComponent" />
+      <recent name="$PROJECT_DIR$/plugins/notifications/src/components" />
+      <recent name="$PROJECT_DIR$/plugins/notifications-backend/src/services/NotificationService" />
+      <recent name="$PROJECT_DIR$/plugins/notifications-backend/src/services" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.23774.318" />
+        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-IU-251.23774.318" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="53c5d0e7-5728-42c1-b322-d2067e429c82" name="Changes" comment="" />
+      <created>1744628124796</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1744628124796</updated>
+      <workItem from="1744628126150" duration="9264000" />
+      <workItem from="1745222330490" duration="2953000" />
+      <workItem from="1745227139999" duration="3032000" />
+    </task>
+    <task id="LOCAL-00001" summary="Add plugins">
+      <option name="closed" value="true" />
+      <created>1745230198291</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1745230198291</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add plugins" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add plugins" />
+  </component>
+</project>

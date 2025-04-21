@@ -1,1 +1,1 @@
-export * from './service/router';
+export { notificationsPlugin as default } from './plugin';
