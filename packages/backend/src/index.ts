@@ -12,8 +12,14 @@ const backend = createBackend();
 
 backend.add(import('@backstage/plugin-app-backend'));
 backend.add(import('@backstage/plugin-proxy-backend'));
+
+// scaffolder
 backend.add(import('@backstage/plugin-scaffolder-backend'));
 backend.add(import('@backstage/plugin-scaffolder-backend-module-github'));
+backend.add(import('@backstage/plugin-scaffolder-backend-module-gitlab'));
+backend.add(import('@roadiehq/scaffolder-backend-module-http-request'));
+
+// techdocs
 backend.add(import('@backstage/plugin-techdocs-backend'));
 
 // auth plugin
@@ -27,6 +33,7 @@ backend.add(import('@backstage/plugin-catalog-backend'));
 backend.add(
   import('@backstage/plugin-catalog-backend-module-scaffolder-entity-model'),
 );
+
 // See https://backstage.io/docs/integrations/github/discovery
 backend.add(import('@backstage/plugin-catalog-backend-module-github'));
 // See https://backstage.io/docs/integrations/gitlab/discovery
