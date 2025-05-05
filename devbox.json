@@ -1,13 +1,15 @@
 {
-  "$schema":  "https://raw.githubusercontent.com/jetify-com/devbox/0.14.0/.schema/devbox.schema.json",
-  "packages": ["nodejs@22"],
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.14.0/.schema/devbox.schema.json",
+  "packages": [
+    "nodejs@18"
+  ],
   "env": {
     "DEVBOX_COREPACK_ENABLED": "true"
   },
   "shell": {
     "init_hook": [
       "yarn install",
-      "echo 'Have fun with Backstage! \uD83D\uDE80'"
+      "echo 'Have fun with Backstage! 🚀'"
     ],
     "scripts": {
       "backstage": "yarn dev",
