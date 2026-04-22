@@ -7,8 +7,35 @@
  */
 
 import { createBackend } from '@backstage/backend-defaults';
+import { createServiceFactory } from '@backstage/backend-plugin-api';
+import { metricsServiceRef } from '@backstage/backend-plugin-api/alpha';
+
+const noop = () => {};
+const noopObservable = { addCallback: noop, removeCallback: noop };
 
 const backend = createBackend();
+
+// @backstage/backend-defaults@0.15.x does not yet ship a metricsServiceFactory,
+// but catalog-backend@3.x and scaffolder-backend@3.x require it. Register a
+// no-op factory so the backend can start; replace with a real OpenTelemetry
+// implementation when metrics collection is needed.
+backend.add(
+  createServiceFactory({
+    service: metricsServiceRef,
+    deps: {},
+    async factory() {
+      return {
+        createCounter: () => ({ add: noop }),
+        createUpDownCounter: () => ({ add: noop }),
+        createHistogram: () => ({ record: noop }),
+        createGauge: () => ({ record: noop }),
+        createObservableCounter: () => noopObservable,
+        createObservableUpDownCounter: () => noopObservable,
+        createObservableGauge: () => noopObservable,
+      };
+    },
+  }),
+);
 
 backend.add(import('@backstage/plugin-app-backend'));
 backend.add(import('@backstage/plugin-proxy-backend'));
@@ -65,7 +92,7 @@ backend.add(import('@backstage/plugin-kubernetes-backend'));
 
 // argocd
 // See https://github.com/RoadieHQ/roadie-backstage-plugins/tree/main/plugins/backend/backstage-plugin-argo-cd-backend
-backend.add(import('@roadiehq/backstage-plugin-argo-cd-backend/alpha'));
+backend.add(import('@roadiehq/backstage-plugin-argo-cd-backend'));
 
 // dynatrace
 // See https://github.com/Dynatrace/backstage-plugin

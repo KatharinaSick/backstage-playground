@@ -5,7 +5,11 @@
 #
 # yarn install --immutable
 # yarn tsc
-# yarn build:backend
+# yarn build:all
+#
+# NOTE: yarn build:all is required (not yarn build:backend) because the app-backend
+# plugin serves the compiled frontend from node_modules/app/dist/static. The frontend
+# must be built first so it is included in the backend bundle.
 #
 # Once the commands have been run, you can build the image using `yarn build-image`
 #
@@ -13,7 +17,7 @@
 # https://backstage.io/docs/deployment/docker#multi-stage-build
 
 # Wee need version 18 because of https://github.com/backstage/backstage/issues/22419
-FROM node:18-bookworm-slim
+FROM node:22-bookworm-slim
 
 # Set Python interpreter for `node-gyp` to use
 ENV PYTHON=/usr/bin/python3

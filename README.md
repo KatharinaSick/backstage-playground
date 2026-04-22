@@ -6,6 +6,10 @@
 This is a very minimalistic [Backstage](https://backstage.io) instance that can be used for testing or demoing
 Backstage.
 
+## Version history
+
+Updating this to the latest dynatrace plugin version
+
 ## Development
 
 To start the app, run:
